@@ -2,6 +2,8 @@ import './App.css';
 import Registration from "./components/Registration/Registration";
 import Login from "./components/Login/Login"
 import DocumentEditor from "./components/Document/Document.js"
+import Dashboard from "./components/Dashboard/Dashboard"
+import { useAuth } from "./context/auth";
 
 import {
   BrowserRouter as Router,
@@ -15,10 +17,16 @@ function App() {
   return (
     <Router>
       <Switch>
-        <Route path='/register' exact component={Registration} />
-        <Route path='/login' exact component={Login} />
-        {/* <Route path='/dashboard' exact component={Dashboard} /> */}
-        <Route path="/" exact>
+        <Route path="/login">
+          <Login />
+        </Route>
+        <Route path="/register">
+          <Registration />
+        </Route>
+        <PrivateRoute path="/dashboard">
+          <Dashboard />
+        </PrivateRoute>
+        <Route path="/documents" exact>
           <Redirect to={`/documents/${uuidV4()}`} />
         </Route>
         <Route path="/documents/:id">
@@ -26,6 +34,27 @@ function App() {
         </Route>
       </Switch>
     </Router>
+  );
+}
+
+function PrivateRoute({ children, ...rest }) {
+  const { user } = useAuth();
+  return (
+    <Route
+      {...rest}
+      render={({ location }) =>
+        user ? (
+          children
+        ) : (
+          <Redirect
+            to={{
+              pathname: "/login",
+              state: { from: location },
+            }}
+          />
+        )
+      }
+    />
   );
 }
 

@@ -27,7 +27,7 @@ function Dashboard() {
 
   const handleCreateNewDocument = async () => {
     try {
-      const response = await axios.post("https://localhost:3001/documents", {
+      const response = await axios.post("https://localhost:3001/documents/create", {
         userId: user.id,
       });
       history.push(`/document/${response.data.id}`);
@@ -38,7 +38,7 @@ function Dashboard() {
 
 
   return (
-    <div>
+    <div className="dashboard">
       <h1>Dashboard</h1>
       <button onClick={handleCreateNewDocument}>Create New Document</button>
       <ul>

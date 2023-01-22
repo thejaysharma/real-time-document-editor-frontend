@@ -24,9 +24,9 @@ function App() {
         <Route path="/register">
           <Registration />
         </Route>
-        <PrivateRoute path="/dashboard">
+        <Route path="/dashboard">
           <Dashboard />
-        </PrivateRoute>
+        </Route>
         <Route path="/documents" exact>
           <Redirect to={`/documents/${uuidV4()}`} />
         </Route>

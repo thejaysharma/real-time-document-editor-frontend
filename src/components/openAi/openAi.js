@@ -11,6 +11,17 @@ function OpenAi() {
   const handleSearch = () => {
     setIsSearching(true);
   };
+  function copyResult() {
+    navigator.clipboard
+      .writeText(searchResults)
+      .then(() => {
+        alert("Result copied to clipboard!");
+      })
+      .catch((err) => {
+        console.log("Failed to copy result: ", err);
+      });
+  }
+
 
   useEffect(() => {
     if (isSearching) {
@@ -20,7 +31,7 @@ function OpenAi() {
       const client = axios.create({
         headers: {
           Authorization:
-            "Bearer " + "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",
+            "Bearer " + "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",
         },
       });
 
@@ -64,7 +75,10 @@ function OpenAi() {
           </button>
         </div>
       </div>
-      <textarea className="result" type="text" value={searchResults}></textarea>
+      <div className="flex-column">
+        <textarea className="result" type="text" value={searchResults}></textarea>
+        <button className="copy-btn" onClick={() => copyResult()}>Copy Result</button>
+      </div>
     </div>
   );
 }

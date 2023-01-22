@@ -19,7 +19,7 @@ function Registeration() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const { data } = await axios.post("/register", { name, email, password });
+      const { data } = await axios.post("http://localhost:3001/users/register", { name, email, password });
       setError("");
       history.push("/login");
     } catch (err) {
@@ -28,6 +28,9 @@ function Registeration() {
       setIsLoading(false);
     }
   };
+  if (isLoggedIn) {
+    return <Redirect to='/login' />
+  }
 
   return (
     <div>

@@ -20,7 +20,7 @@ function Login() {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:3001/login", { email, password });
+      const { data } = await axios.post("http://localhost:3001/users/login", { email, password });
         setUser(data.user);
         localStorage.setItem("token", data.token);
         history.push("/dashboard");

@@ -3,6 +3,7 @@ import "./openAi.scss";
 import axios from "axios";
 import { FiSearch } from "react-icons/fi";
 
+
 function OpenAi() {
   const [searchQuery, setSearchQuery] = useState("");
   const [searchResults, setSearchResults] = useState("");
@@ -31,7 +32,7 @@ function OpenAi() {
       const client = axios.create({
         headers: {
           Authorization:
-            "Bearer " + "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",
+            "Bearer " + process.env.openAI_Secret,
         },
       });
 

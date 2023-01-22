@@ -1,8 +1,4 @@
 import "./registration.scss";
-import { BsPersonCircle, BsKey } from "react-icons/bs";
-import { MdOutlineMailOutline } from "react-icons/md";
-import { Link } from 'react-router-dom';
-
 import React, { useState } from "react";
 import { useHistory } from "react-router-dom";
 import axios from "axios";

@@ -1,12 +1,10 @@
 import "./login.scss";
-import {BsKey } from "react-icons/bs";
-import { MdOutlineMailOutline } from "react-icons/md";
-
 import React, { useState } from "react";
 import { useAuth } from "../../context/auth";
 import { useHistory } from "react-router-dom";
-import { Link } from 'react-router-dom';
 import axios from "axios";
+import { BsKey } from "react-icons/bs";
+import { MdOutlineMailOutline } from "react-icons/md";
 
 function Login() {
   const [email, setEmail] = useState("");
@@ -21,9 +19,9 @@ function Login() {
     setIsLoading(true);
     try {
       const { data } = await axios.post("http://localhost:3001/login", { email, password });
-        setUser(data.user);
-        localStorage.setItem("token", data.token);
-        history.push("/dashboard");
+      setUser(data.user);
+      localStorage.setItem("token", data.token);
+      history.push("/dashboard");
     } catch (err) {
       setError(err.response.data.message);
     } finally {
@@ -32,33 +30,40 @@ function Login() {
   };
 
   return (
-    <div>
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div>
-          <label htmlFor="password">Password:</label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
-        {error && <p style={{ color: "red" }}>{error}</p>}
-        <button type="submit" disabled={isLoading}>
-          {isLoading ? "Loading..." : "Login"}
-        </button>
-      </form>
+    <div className="login">
+      <div className="login_container">
+        <form onSubmit={handleSubmit}>
+          <h1>Login Account</h1>
+          <div className="input_box">
+            <input
+              type="email"
+              id="email"
+              name="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              required
+            />
+            <label htmlFor="email" className="label-name">Email Address</label>
+            <MdOutlineMailOutline className="input_icons" />
+
+          </div>
+          <div className="input_box">
+            <input
+              type="password"
+              id="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              required
+            />
+            <label htmlFor="password" className="label-name">Password</label>
+            <BsKey className="input_icons" />
+          </div>
+          {error && <p style={{ color: "red" }}>{error}</p>}
+          <button type="submit" disabled={isLoading} className="btn">
+            {isLoading ? "Loading..." : "Login"}
+          </button>
+        </form>
+      </div>
     </div>
   );
 }

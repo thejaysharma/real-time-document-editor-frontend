@@ -24,9 +24,9 @@ function Registeration() {
       setIsLoading(false);
     }
   };
-  if (isLoggedIn) {
-    return <Redirect to='/login' />
-  }
+  // if (isLoggedIn) {
+  //   return <Redirect to='/login' />
+  // }
 
   return (
     <div className="registration">

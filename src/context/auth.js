@@ -14,7 +14,7 @@ export const AuthProvider = ({ children }) => {
         const headers = {
           'Authorization': `Bearer ${token}`
         }
-        const res = await axios.get('/user', {headers});
+        const res = await axios.get('http://localhost:3001/user', {headers});
         setUser(res.data);
         setIsLoading(false);
       } catch (error) {
@@ -27,7 +27,7 @@ export const AuthProvider = ({ children }) => {
 
   const login = async (email, password) => {
     try {
-      const res = await axios.post('/login', { email, password });
+      const res = await axios.post('http://localhost:3001/users/login', { email, password });
       setUser(res.data.user);
       localStorage.setItem('token', res.data.token);
     } catch (error) {

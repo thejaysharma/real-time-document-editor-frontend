@@ -1,7 +1,7 @@
 import "./login.scss";
 import React, { useState } from "react";
 import { useAuth } from "../../context/auth";
-import { useHistory } from "react-router-dom";
+import { Router, useHistory } from "react-router-dom";
 import axios from "axios";
 import { BsKey } from "react-icons/bs";
 import { MdOutlineMailOutline } from "react-icons/md";
@@ -14,20 +14,43 @@ function Login() {
   const { setUser } = useAuth();
   const history = useHistory();
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   setIsLoading(true);
+  //   try {
+  //     const { data } = await axios.post("http://localhost:3001/users/login", { email, password });
+  //     setUser(data.user);
+  //     console.log(data.user);
+  //     localStorage.setItem("token", data.token);
+  //     console.log(data.token);
+  //     history.push("/dashboard");
+  //   } catch (err) {
+  //     setError(err.response.data.message);
+  //     console.log(err)
+  //   } finally {
+  //     setIsLoading(false);
+  //   }
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     setIsLoading(true);
     try {
-      const { data } = await axios.post("http://localhost:3001/users/login", { email, password });
-      setUser(data.user);
-      localStorage.setItem("token", data.token);
+      const data= await axios.post("http://localhost:3001/users/login", { email, password });
+      console.log(data.data.token);
+      // setUser(data.user);
+      localStorage.setItem("token", data.data.token);
+      // console.log(data.token);
       history.push("/dashboard");
     } catch (err) {
-      setError(err.response.data.message);
+      setError(err);
+      console.log(err)
     } finally {
       setIsLoading(false);
+      console.log("done")
     }
   };
+
 
   return (
     <div className="login">

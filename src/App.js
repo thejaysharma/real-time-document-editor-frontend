@@ -33,6 +33,9 @@ function App() {
         <Route path="/documents/:id">
           <DocumentEditor />
         </Route>
+        <Route path="/">
+          <Home/>
+        </Route>
       </Switch>
     </Router>
   );

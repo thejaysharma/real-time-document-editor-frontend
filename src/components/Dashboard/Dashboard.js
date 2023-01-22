@@ -27,10 +27,10 @@ function Dashboard() {
 
   const handleCreateNewDocument = async () => {
     try {
-      const response = await axios.post("https://localhost:3001/documents/create", {
-        userId: user.id,
-      });
-      history.push(`/document/${response.data.id}`);
+      // const response = await axios.post("https://localhost:3001/documents/create", {
+      //   userId: user.id,
+      // });
+      history.push(`/documents/`);
     } catch (error) {
       console.log(error);
     }

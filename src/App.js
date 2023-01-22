@@ -3,6 +3,7 @@ import Registration from "./components/Registration/Registration";
 import Login from "./components/Login/Login"
 import DocumentEditor from "./components/Document/Document.js"
 import Dashboard from "./components/Dashboard/Dashboard"
+import Home from "./components/Home/Home"
 import { useAuth } from "./context/auth";
 
 import {
@@ -48,7 +49,7 @@ function PrivateRoute({ children, ...rest }) {
         ) : (
           <Redirect
             to={{
-              pathname: "/login",
+              pathname: "/dashboard",
               state: { from: location },
             }}
           />

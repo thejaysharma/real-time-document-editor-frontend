@@ -14,8 +14,10 @@ export const AuthProvider = ({ children }) => {
         const headers = {
           'Authorization': `Bearer ${token}`
         }
-        const res = await axios.get('http://localhost:3001/user', {headers});
-        setUser(res.data);
+        const res = await axios.get('http://localhost:3001/users', {headers});
+        if (!user) {
+          setUser(res.data);
+        }
         setIsLoading(false);
       } catch (error) {
         console.error(error);
@@ -23,7 +25,7 @@ export const AuthProvider = ({ children }) => {
       }
     }
     fetchUser();
-  }, []);
+  }, []); 
 
   const login = async (email, password) => {
     try {
@@ -33,6 +35,7 @@ export const AuthProvider = ({ children }) => {
     } catch (error) {
       console.error(error);
     }
+    console.log('logging in')
   }
 
   const logout = () => {
@@ -42,12 +45,13 @@ export const AuthProvider = ({ children }) => {
 
   const register = async (name, email, password) => {
     try {
-      const res = await axios.post('/register', { name, email, password });
+      const res = await axios.post('http://localhost:3001/users/register', { name, email, password });
       setUser(res.data.user);
       localStorage.setItem('token', res.data.token);
     } catch (error) {
       console.error(error);
     }
+    console.log('registering')
   }
 
   return (

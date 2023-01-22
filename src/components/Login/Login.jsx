@@ -42,10 +42,13 @@ function Login() {
       localStorage.setItem("token", data.data.token);
       // console.log(data.token);
       history.push("/dashboard");
+      console.log("line reached")
     } catch (err) {
+      console.log("error is present")
       setError(err);
       console.log(err)
     } finally {
+      console.log("came out of the error hell")
       setIsLoading(false);
       console.log("done")
     }
